@@ -15,9 +15,9 @@ public class TesteBanco {
 		UserDao userdao = new UserDao();
 		Cliente cliente = new Cliente();
 		
-		cliente.setNome("Alex green");
-		cliente.setEmail("alex@gmail.com");
-		cliente.setCpf("10987654321");
+		cliente.setNome("Carlos José");
+		cliente.setEmail("carlos@gmail.com");
+		cliente.setCpf("10987654678");
 		
 		userdao.salvar(cliente);
 	}
@@ -57,11 +57,17 @@ public class TesteBanco {
 		
 		try {
 			Cliente objetoBanco = dao.buscar(2);
-			objetoBanco.setNome("Nome mudado com o metodo atualizar");
+			objetoBanco.setNome("Bob Dylan");
 			dao.atualizar(objetoBanco);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void initDeletar() {
+		UserDao dao = new UserDao();
+		dao.delete(6);
 	}
 	
 	

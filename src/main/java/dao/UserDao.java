@@ -93,6 +93,22 @@ public class UserDao {
 		}
 	}
 	
+	public void delete(int id) {
+		try {
+			String sql = "delete from cliente where idcliente = " + id;
+			PreparedStatement stm = connection.prepareStatement(sql);
+			stm.execute();
+			connection.commit();
+		}catch(Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 	
