@@ -56,6 +56,43 @@ public class UserDao {
 		return list;
 	}
 	
+	public Cliente buscar (int id) throws SQLException {
+		
+		Cliente retorno = new Cliente();
+		
+		String sql = "select * from cliente where idcliente = " + id;
+		PreparedStatement stm = connection.prepareStatement(sql);
+		ResultSet resultado = stm.executeQuery();
+		
+		while(resultado.next()) {
+			retorno.setId(resultado.getInt("idcliente"));
+			retorno.setNome(resultado.getString("nome"));
+			retorno.setEmail(resultado.getString("email"));
+			retorno.setCpf(resultado.getString("cpf"));		
+		}
+		
+		return retorno;
+		
+	}
+	
+	public void atualizar(Cliente cliente) {
+		String sql = "update cliente set nome = ? where idcliente = " + cliente.getId();
+		
+		try {
+			PreparedStatement stm = connection.prepareStatement(sql);
+			stm.setString(1, cliente.getNome());
+			stm.execute();
+			connection.commit();
+		} catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 	

@@ -1,5 +1,6 @@
 package br.com.locadora;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Test;
@@ -36,4 +37,38 @@ public class TesteBanco {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	@Test
+	public void initBuscar() {
+		UserDao userdao = new UserDao();
+		
+		try {
+			Cliente cliente  = userdao.buscar(1);
+			System.out.println(cliente);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void intiAtualizar() {
+		UserDao dao = new UserDao();
+		
+		try {
+			Cliente objetoBanco = dao.buscar(2);
+			objetoBanco.setNome("Nome mudado com o metodo atualizar");
+			dao.atualizar(objetoBanco);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
